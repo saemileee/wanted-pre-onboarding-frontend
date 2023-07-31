@@ -7,9 +7,5 @@ export function PasswordInput({ dataTestId }: { dataTestId: string }) {
 }
 
 export function SubmitInput({ dataTestId, text }: { dataTestId: string; text: string }) {
-  return (
-    <input type="submit" data-testid={dataTestId}>
-      {text}
-    </input>
-  );
+  return <input type="submit" data-testid={dataTestId} value={text}></input>;
 }

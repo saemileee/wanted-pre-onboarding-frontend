@@ -1,7 +1,7 @@
 {
-  "plugins": ["prettier"],
+  // "plugins": ["prettier"],
   "extends": ["prettier"],
   "rules": {
-    "indent": "error"
+    "indent": ["error", 2]
   }
 }
