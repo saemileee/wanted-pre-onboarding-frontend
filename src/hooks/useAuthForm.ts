@@ -1,27 +1,34 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import useValidation from "./useValidation";
 import * as AuthType from "../interface/Auth";
+import { AuthContext } from "../contexts/AuthProvider/context";
 
 function useAuthForm(type?: AuthType.Type) {
-  // 훅을 다시 쓸 때 마다 아래 함수가 초기화 되기 때문에 상태관리 방법을 바꿔야함
-  const [formData, setFormData] = useState<AuthType.Form>({
-    email: "",
-    password: "",
-  });
-
   const { isValid, validationMsg, handleValidator } = useValidation();
+  const { formData, setFormData } = useContext(AuthContext);
 
   const handleFieldChange = (field: AuthType.Field, value: string) => {
-    console.log(formData);
     handleValidator(field, value);
-    setFormData((prevFormData) => ({
-      ...prevFormData,
+    setFormData({
+      ...formData,
       [field]: value,
-    }));
+    });
   };
 
   const handleSubmit = () => {
-    console.log(formData);
+    const { isValid: emailIsValid, validationMsg: emailValidMsg } = handleValidator(
+      "email",
+      formData.email
+    )!;
+
+    const { isValid: pwdIsValid, validationMsg: pwdValidMsg } = handleValidator(
+      "password",
+      formData.password
+    )!;
+
+    if (emailIsValid && pwdIsValid) {
+      console.log(formData);
+    }
   };
 
   return { isValid, validationMsg, formData, handleFieldChange, handleSubmit };

@@ -9,13 +9,16 @@ export function useValidation() {
 
   const handleValidator = (field: AuthType.Field, value: string) => {
     if (field === "email") {
-      setIsValid(emailRegex.test(value));
+      const isValid = emailRegex.test(value);
+      setIsValid(isValid);
       setValidationMsg(EMAIL_VALIDATION_MSG);
+      return { isValid, validationMsg };
     }
     if (field === "password") {
-      console.log(passwordRegex.test(value));
-      setIsValid(passwordRegex.test(value));
+      const isValid = passwordRegex.test(value);
+      setIsValid(isValid);
       setValidationMsg(PASSWORD_VALIDATION_MSG);
+      return { isValid, validationMsg };
     }
   };
 
