@@ -1,7 +1,7 @@
 import useAuthForm from "../../hooks/useAuthForm";
 
 export function EmailInputContainer({ dataTestId }: { dataTestId: string }) {
-  const { isValid, validationMsg, handleFieldChange } = useAuthForm("signIn");
+  const { isValid, validationMsg, handleFieldChange } = useAuthForm();
 
   return (
     <>
@@ -17,7 +17,7 @@ export function EmailInputContainer({ dataTestId }: { dataTestId: string }) {
 }
 
 export function PasswordInputContainer({ dataTestId }: { dataTestId: string }) {
-  const { isValid, validationMsg, handleFieldChange } = useAuthForm("signIn");
+  const { isValid, validationMsg, handleFieldChange } = useAuthForm();
   return (
     <>
       <input

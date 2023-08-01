@@ -2,12 +2,12 @@ import { EmailInputContainer, PasswordInputContainer, SubmitInput } from "../com
 import useAuthForm from "../../hooks/useAuthForm";
 
 const SignUpForm = () => {
-  const { handleSubmit } = useAuthForm("signUp");
+  const { handleSubmit } = useAuthForm();
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        handleSubmit();
+        handleSubmit("signUp");
       }}
     >
       <EmailInputContainer dataTestId="email-input" />

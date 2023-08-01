@@ -8,7 +8,7 @@ const SignInForm = () => {
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        handleSubmit();
+        handleSubmit("signIn");
       }}
     >
       <EmailInputContainer dataTestId="email-input" />
