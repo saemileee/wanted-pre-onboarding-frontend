@@ -32,14 +32,14 @@ async function request<T>({
   // requiresToken && (headers.Authorization = `Bearer ${Token.getToken() ? Token.getToken() : ""}`);
 
   try {
-    const response = await axios.request<T>({
+    const response = await axios.request<T, any>({
       url: apiUrl,
       method,
       headers,
       data,
     });
 
-    return response.data;
+    return response;
   } catch (error: any) {
     throw new Error("요청이 실패하였습니다.");
   }

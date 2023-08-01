@@ -2,7 +2,8 @@ import { useContext, useState } from "react";
 import useValidation from "./useValidation";
 import * as AuthType from "../interface/Auth";
 import { AuthContext } from "../contexts/AuthProvider/context";
-import { SIGININ_VALIDATION_MSG } from "../constants/message";
+import { SIGININ_VALIDATION_MSG, SIGNUP_ERR, SIGNUP_SUCCESS } from "../constants/message";
+import * as authFetcher from "../api/authFetcher";
 
 function useAuthForm(type?: AuthType.Type) {
   const { isValid, validationMsg, handleValidator } = useValidation();
@@ -17,20 +18,26 @@ function useAuthForm(type?: AuthType.Type) {
   };
 
   const handleSubmit = () => {
-    const { isValid: emailIsValid, validationMsg: emailValidMsg } = handleValidator(
-      "email",
-      formData.email
-    )!;
+    const { isValid: emailIsValid } = handleValidator("email", formData.email)!;
 
-    const { isValid: pwdIsValid, validationMsg: pwdValidMsg } = handleValidator(
-      "password",
-      formData.password
-    )!;
+    const { isValid: pwdIsValid } = handleValidator("password", formData.password)!;
 
     if (emailIsValid && pwdIsValid) {
-      console.log(formData);
+      if ((type = "signUp")) {
+        const fetchData = async () => {
+          try {
+            const res = await authFetcher.postSingUp(formData);
+            res === 201 ? alert(SIGNUP_SUCCESS) : null;
+          } catch (err) {
+            alert(SIGNUP_ERR);
+            console.log(err);
+          }
+        };
+        fetchData();
+        console.log(formData);
+      }
     } else {
-      console.log(SIGININ_VALIDATION_MSG);
+      alert(SIGININ_VALIDATION_MSG);
     }
   };
 
