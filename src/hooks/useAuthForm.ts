@@ -10,8 +10,11 @@ import {
   SIGNUP_SUCCESS,
 } from "../constants/message";
 import * as authFetcher from "../api/authFetcher";
+import { useNavigate } from "react-router-dom";
+import ROUTES from "../constants/routes";
 
 function useAuthForm() {
+  const navigate = useNavigate();
   const { isValid, validationMsg, handleValidator } = useValidation();
   const { formData, setFormData } = useContext(AuthContext);
 
@@ -25,7 +28,6 @@ function useAuthForm() {
 
   const handleSubmit = (type: AuthType.Type) => {
     const { isValid: emailIsValid } = handleValidator("email", formData.email)!;
-
     const { isValid: pwdIsValid } = handleValidator("password", formData.password)!;
 
     if (emailIsValid && pwdIsValid) {
@@ -47,6 +49,7 @@ function useAuthForm() {
             if (res.status === 200) {
               alert(SIGNIN_SUCCESS);
               localStorage.setItem("accessToken", res.data.access_token);
+              navigate(ROUTES.TODO);
             }
           } catch (err) {
             alert(SIGNIN_ERR);
