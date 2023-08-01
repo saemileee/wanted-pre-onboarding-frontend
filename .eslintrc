@@ -1,7 +1,9 @@
 {
-  // "plugins": ["prettier"],
-  "extends": ["prettier"],
+  "extends": ["airbnb", "airbnb-typescript"],
   "rules": {
     "indent": ["error", 2]
+  },
+  "parserOptions": {
+    "project": "./tsconfig.json"
   }
 }
