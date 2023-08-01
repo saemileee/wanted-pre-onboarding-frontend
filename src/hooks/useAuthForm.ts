@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import useValidation from "./useValidation";
 import * as AuthType from "../interface/Auth";
 import { AuthContext } from "../contexts/AuthProvider/context";
@@ -24,7 +24,6 @@ function useAuthForm() {
   };
 
   const handleSubmit = (type: AuthType.Type) => {
-    console.log(type);
     const { isValid: emailIsValid } = handleValidator("email", formData.email)!;
 
     const { isValid: pwdIsValid } = handleValidator("password", formData.password)!;
@@ -37,11 +36,9 @@ function useAuthForm() {
             res.status === 201 ? alert(SIGNUP_SUCCESS) : null;
           } catch (err) {
             alert(SIGNUP_ERR);
-            console.log(err);
           }
         };
         fetchData();
-        console.log(formData);
       }
       if (type === "signIn") {
         const fetchData = async () => {
@@ -57,7 +54,6 @@ function useAuthForm() {
           }
         };
         fetchData();
-        console.log(formData);
       }
     } else {
       alert(SIGININ_VALIDATION_MSG);
