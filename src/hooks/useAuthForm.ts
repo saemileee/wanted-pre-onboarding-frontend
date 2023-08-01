@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import useValidation from "./useValidation";
 import * as AuthType from "../interface/Auth";
 import { AuthContext } from "../contexts/AuthProvider/context";
+import { SIGININ_VALIDATION_MSG } from "../constants/message";
 
 function useAuthForm(type?: AuthType.Type) {
   const { isValid, validationMsg, handleValidator } = useValidation();
@@ -28,6 +29,8 @@ function useAuthForm(type?: AuthType.Type) {
 
     if (emailIsValid && pwdIsValid) {
       console.log(formData);
+    } else {
+      console.log(SIGININ_VALIDATION_MSG);
     }
   };
 
