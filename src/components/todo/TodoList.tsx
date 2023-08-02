@@ -3,8 +3,7 @@ import useTodoList from '../../hooks/useTodoList';
 import * as TodoType from '../../interface/Todo';
 
 function TodoList() {
-  const { todos, removeTodo, checkTodo, handleEditClick, updateTodo, handleEditCancelClick } =
-    useTodoList();
+  const { todos, removeTodo, handleEditClick, updateTodo, handleEditCancelClick } = useTodoList();
   const [todoValue, setTodoValue] = useState('');
   return (
     <ul>
@@ -23,7 +22,7 @@ function TodoList() {
                 <button
                   type="button"
                   data-testid="submit-button"
-                  onClick={() => updateTodo(id, todoValue)}
+                  onClick={() => updateTodo(id, todoValue, isCompleted)}
                 >
                   제출
                 </button>
@@ -38,7 +37,11 @@ function TodoList() {
             ) : (
               <div>
                 <label htmlFor={id.toString()}>
-                  <input type="checkbox" checked={isCompleted} onChange={() => checkTodo(id)} />
+                  <input
+                    type="checkbox"
+                    checked={isCompleted}
+                    onChange={() => updateTodo(id, todo, !isCompleted)}
+                  />
                   <span>{todo}</span>
                 </label>
                 <button

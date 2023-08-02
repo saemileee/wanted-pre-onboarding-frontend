@@ -57,35 +57,24 @@ const useTodoList = () => {
     fetchData();
   };
 
-  const updateTodo = (id: number, value: string) => {
-    const newTodo = { todo: value, isEditMode: false };
+  const updateTodo = (id: number, value: string, isCompleted: boolean) => {
+    const newTodo = { todo: value, isCompleted, isEditMode: false };
     const fetchData = async () => {
       try {
         await todoFetcher.updateTodo(id, newTodo);
+        setTodos(
+          todos.map((item: TodoType.Item): TodoType.Item => {
+            if (item.id === id) {
+              return { ...item, todo: value, isEditMode: false, isCompleted };
+            }
+            return item;
+          })
+        );
       } catch (err: any) {
         throw new Error(err);
       }
     };
     fetchData();
-    // setTodos(
-    //   todos.map((item: TodoType.Item): TodoType.Item => {
-    //     if (item.id === id) {
-    //       return { ...item, todo: value, isEditMode: false };
-    //     }
-    //     return item;
-    //   })
-    // );
-  };
-
-  const checkTodo = (id: number) => {
-    setTodos(
-      todos.map((item: TodoType.Item): TodoType.Item => {
-        if (item.id === id) {
-          return { ...item, isCompleted: !item.isCompleted };
-        }
-        return item;
-      })
-    );
   };
 
   const handleEditClick = (id: number) => {
@@ -115,7 +104,6 @@ const useTodoList = () => {
     todos,
     addTodo,
     removeTodo,
-    checkTodo,
     updateTodo,
     handleEditClick,
     handleEditCancelClick,
