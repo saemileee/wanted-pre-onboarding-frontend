@@ -15,13 +15,18 @@ import ROUTES from '../constants/routes';
 
 function useAuthForm() {
   const navigate = useNavigate();
-  const { isValid, validationMsg, handleValidator } = useValidation();
-  const { formData, setFormData } = useContext(AuthContext);
+  const { handleValidator } = useValidation();
+  const {
+    formData,
+    setFormData,
+    emailValidation,
+    setEmailValidation,
+    pwdValidation,
+    setPwdValidation,
+  } = useContext(AuthContext);
 
   const CheckSubmitBtnEnabled = () => {
-    const { emailIsValid } = handleValidator('email', formData.email)!;
-    const { pwdIsValid } = handleValidator('password', formData.password)!;
-    if (emailIsValid && pwdIsValid) {
+    if (emailValidation.isValid && pwdValidation.isValid) {
       return true;
     }
     return false;
@@ -29,20 +34,25 @@ function useAuthForm() {
 
   const isSubmitBtnEnabled = useMemo(
     () => CheckSubmitBtnEnabled(),
-    [formData.email, formData.password]
+    [emailValidation, pwdValidation]
   );
 
   const handleFieldChange = (field: AuthType.Field, value: string) => {
-    handleValidator(field, value);
-    setFormData({
-      ...formData,
-      [field]: value,
-    });
+    if (field === 'email') {
+      const validationResult = handleValidator('email', value)!;
+      setEmailValidation(validationResult);
+      setFormData(value);
+    }
+    if (field === 'password') {
+      const validationResult = handleValidator('password', value)!;
+      setPwdValidation(validationResult);
+      setFormData(value);
+    }
   };
 
   const handleSubmit = (type: AuthType.Type) => {
-    const { emailIsValid } = handleValidator('email', formData.email)!;
-    const { pwdIsValid } = handleValidator('password', formData.password)!;
+    const { isValid: emailIsValid } = handleValidator('email', formData.email)!;
+    const { isValid: pwdIsValid } = handleValidator('password', formData.password)!;
 
     if (emailIsValid && pwdIsValid) {
       if (type === 'signUp') {
@@ -80,8 +90,8 @@ function useAuthForm() {
   };
 
   return {
-    isValid,
-    validationMsg,
+    emailValidation,
+    pwdValidation,
     formData,
     handleFieldChange,
     handleSubmit,

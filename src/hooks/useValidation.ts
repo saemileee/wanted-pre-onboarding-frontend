@@ -12,15 +12,15 @@ function useValidation() {
       const emailIsValid = emailRegex.test(value);
       setIsValid(emailIsValid);
       setValidationMsg(EMAIL_VALIDATION_MSG);
-      return { emailIsValid, validationMsg };
+      return { isValid: emailIsValid, msg: validationMsg };
     }
     if (field === 'password') {
       const pwdIsValid = passwordRegex.test(value);
       setIsValid(pwdIsValid);
       setValidationMsg(PASSWORD_VALIDATION_MSG);
-      return { pwdIsValid, validationMsg };
+      return { isValid: pwdIsValid, msg: validationMsg };
     }
-    return {};
+    return { isValid: false, msg: '' };
   };
 
   return { isValid, validationMsg, handleValidator };

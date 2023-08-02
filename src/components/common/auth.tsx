@@ -4,7 +4,7 @@ import useAuthForm from '../../hooks/useAuthForm';
 import ROUTES from '../../constants/routes';
 
 export function EmailInputContainer({ dataTestId }: { dataTestId: string }) {
-  const { isValid, validationMsg, handleFieldChange } = useAuthForm();
+  const { emailValidation, handleFieldChange } = useAuthForm();
 
   return (
     <>
@@ -14,13 +14,13 @@ export function EmailInputContainer({ dataTestId }: { dataTestId: string }) {
         data-testid={dataTestId}
         onChange={(e) => handleFieldChange('email', e.target.value)}
       />
-      {!isValid ? <p>{validationMsg}</p> : null}
+      {!emailValidation.isValid ? <p>{emailValidation.msg}</p> : null}
     </>
   );
 }
 
 export function PasswordInputContainer({ dataTestId }: { dataTestId: string }) {
-  const { isValid, validationMsg, handleFieldChange } = useAuthForm();
+  const { pwdValidation, handleFieldChange } = useAuthForm();
   return (
     <>
       <input
@@ -29,7 +29,7 @@ export function PasswordInputContainer({ dataTestId }: { dataTestId: string }) {
         data-testid={dataTestId}
         onChange={(e) => handleFieldChange('password', e.target.value)}
       />
-      {!isValid ? <p>{validationMsg}</p> : null}
+      {!pwdValidation.isValid ? <p>{pwdValidation.msg}</p> : null}
     </>
   );
 }
