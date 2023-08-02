@@ -78,11 +78,10 @@ const put = (
 const del = (
   endpoint: string | undefined,
   params = '',
-  data: any = {},
   requiresToken = true,
   isformDataHeader = false
 ): Promise<AxiosResponse> =>
-  request({ endpoint, method: 'DELETE', params, data, requiresToken, isformDataHeader });
+  request({ endpoint, method: 'DELETE', params, requiresToken, isformDataHeader });
 
 const patch = (
   endpoint: string | undefined,

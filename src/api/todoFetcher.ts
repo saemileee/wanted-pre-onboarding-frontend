@@ -13,8 +13,8 @@ export async function getTodos() {
   return response;
 }
 
-export async function updateTodo(todo: TodoType.Item) {
-  const response = await Api.put(API_KEY, '/todos', todo, true);
+export async function updateTodo(id: number, todo: TodoType.UpdateTodo) {
+  const response = await Api.put(API_KEY, `/todos/${id}`, todo, true);
   return response;
 }
 
