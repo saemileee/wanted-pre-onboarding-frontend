@@ -3,6 +3,7 @@ export interface Item {
   todo: string;
   isCompleted: boolean;
   userId: number;
+  isEditMode: boolean;
 }
 
 export default {};
