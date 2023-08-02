@@ -35,3 +35,14 @@ export function PasswordInputContainer({ dataTestId }: { dataTestId: string }) {
 export function SubmitInput({ dataTestId, text }: { dataTestId: string; text: string }) {
   return <input type="submit" data-testid={dataTestId} value={text} />;
 }
+
+export function LoginButton() {
+  const handleLogoutClick = () => {
+    localStorage.removeItem('accessToken');
+  };
+  return (
+    <button type="button" onClick={() => handleLogoutClick()}>
+      로그아웃
+    </button>
+  );
+}
