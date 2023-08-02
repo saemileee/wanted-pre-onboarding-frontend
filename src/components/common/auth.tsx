@@ -1,5 +1,7 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import useAuthForm from '../../hooks/useAuthForm';
+import ROUTES from '../../constants/routes';
 
 export function EmailInputContainer({ dataTestId }: { dataTestId: string }) {
   const { isValid, validationMsg, handleFieldChange } = useAuthForm();
@@ -37,8 +39,10 @@ export function SubmitInput({ dataTestId, text }: { dataTestId: string; text: st
 }
 
 export function LoginButton() {
+  const navigate = useNavigate();
   const handleLogoutClick = () => {
     localStorage.removeItem('accessToken');
+    navigate(ROUTES.SIGNIN);
   };
   return (
     <button type="button" onClick={() => handleLogoutClick()}>

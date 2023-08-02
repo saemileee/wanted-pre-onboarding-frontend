@@ -17,7 +17,6 @@ const useTodoList = () => {
         const res = await todoFetcher.getTodos();
         if (res.status === 200) {
           setTodos(res.data);
-          console.log(res.data);
         }
       } catch (err: any) {
         throw new Error(err);
