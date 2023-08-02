@@ -6,7 +6,6 @@ function TodoList() {
   const { todos, removeTodo, checkTodo, handleEditClick, updateTodo, handleEditCancelClick } =
     useTodoList();
   const [todoValue, setTodoValue] = useState('');
-
   return (
     <ul>
       {todos.map((todoItem: TodoType.Item) => {
