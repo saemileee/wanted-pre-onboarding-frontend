@@ -1,8 +1,8 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from 'react';
 
-export type Type = "signIn" | "signUp";
+export type Type = 'signIn' | 'signUp';
 
-export type Field = "email" | "password";
+export type Field = 'email' | 'password';
 
 export interface Form {
   email: string;

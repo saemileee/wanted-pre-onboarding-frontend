@@ -1,38 +1,41 @@
-import axios from "axios";
+import axios, { AxiosResponse } from 'axios';
 
 interface RequestParams<T> {
   endpoint: string | undefined;
-  method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
+  method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
   params?: string;
   query?: string;
-  data?: any;
+  data?: T; // Use a generic type for data
   requiresToken?: boolean;
   isformDataHeader?: boolean;
 }
 
-async function request<T>({
-  endpoint,
-  method,
-  params = "",
-  query = "",
-  data,
-  requiresToken = true,
+async function request<T>(params: RequestParams<T>): Promise<AxiosResponse> {
+  const {
+    endpoint,
+    method,
+    params: urlParams,
+    query,
+    data,
+    requiresToken,
+    isformDataHeader,
+  } = params;
 
-  isformDataHeader = false,
-}: RequestParams<T>): Promise<T> {
-  const apiUrl = params ? `${endpoint}/${params}${query ? `?${query}` : ""}` : endpoint;
-  const headers: { [key: string]: string } = isformDataHeader
-    ? {
-        "Content-Type": "multipart/form-data",
-      }
-    : {
-        "Content-Type": "application/json",
-      };
+  const apiUrl = urlParams ? `${endpoint}${urlParams}${query ? `?${query}` : ''}` : endpoint;
 
-  // requiresToken && (headers.Authorization = `Bearer ${Token.getToken() ? Token.getToken() : ""}`);
+  const headers: Record<string, string> = isformDataHeader
+    ? { 'Content-Type': 'multipart/form-data' }
+    : { 'Content-Type': 'application/json' };
+
+  if (requiresToken) {
+    const token = localStorage.getItem('accessToken');
+    if (token) {
+      headers.Authorization = `Bearer ${token}`;
+    }
+  }
 
   try {
-    const response = await axios.request<T, any>({
+    const response = await axios.request<T>({
       url: apiUrl,
       method,
       headers,
@@ -40,54 +43,54 @@ async function request<T>({
     });
 
     return response;
-  } catch (error: any) {
-    throw new Error("요청이 실패하였습니다.");
+  } catch (error) {
+    throw new Error('요청이 실패하였습니다.');
   }
 }
 
-const get = <T>(
+const get = (
   endpoint: string | undefined,
-  params = "",
+  params = '',
   requiresToken = true,
-  query = "",
+  query = '',
   isformDataHeader = false
-): Promise<T> =>
-  request<T>({ endpoint, method: "GET", params, requiresToken, query, isformDataHeader });
+): Promise<AxiosResponse> =>
+  request({ endpoint, method: 'GET', params, requiresToken, query, isformDataHeader });
 
-const post = <T>(
+const post = (
   endpoint: string | undefined,
-  params = "",
-  data: any,
-  requiresToken = true,
-  isformDataHeader = false
-): Promise<T> =>
-  request<T>({ endpoint, method: "POST", params, data, requiresToken, isformDataHeader });
-
-const put = <T>(
-  endpoint: string | undefined,
-  params = "",
-  data: any,
-  requiresToken = true,
-  isformDataHeader = false
-): Promise<T> =>
-  request<T>({ endpoint, method: "PUT", params, data, requiresToken, isformDataHeader });
-
-const del = <T>(
-  endpoint: string | undefined,
-  params = "",
+  params = '',
   data: any = {},
   requiresToken = true,
   isformDataHeader = false
-): Promise<T> =>
-  request<T>({ endpoint, method: "DELETE", params, data, requiresToken, isformDataHeader });
+): Promise<AxiosResponse> =>
+  request({ endpoint, method: 'POST', params, data, requiresToken, isformDataHeader });
 
-const patch = <T>(
+const put = (
   endpoint: string | undefined,
-  params = "",
-  data: any,
+  params = '',
+  data: any = {},
   requiresToken = true,
   isformDataHeader = false
-): Promise<T> =>
-  request<T>({ endpoint, method: "PATCH", params, data, requiresToken, isformDataHeader });
+): Promise<AxiosResponse> =>
+  request({ endpoint, method: 'PUT', params, data, requiresToken, isformDataHeader });
+
+const del = (
+  endpoint: string | undefined,
+  params = '',
+  data: any = {},
+  requiresToken = true,
+  isformDataHeader = false
+): Promise<AxiosResponse> =>
+  request({ endpoint, method: 'DELETE', params, data, requiresToken, isformDataHeader });
+
+const patch = (
+  endpoint: string | undefined,
+  params = '',
+  data: any = {},
+  requiresToken = true,
+  isformDataHeader = false
+): Promise<AxiosResponse> =>
+  request({ endpoint, method: 'PATCH', params, data, requiresToken, isformDataHeader });
 
 export { get, post, put, del as delete, patch };

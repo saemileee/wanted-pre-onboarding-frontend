@@ -1,4 +1,5 @@
-import { Dispatch, SetStateAction, createContext } from "react";
-import * as AuthType from "../../interface/Auth";
+import { createContext } from 'react';
 
 export const AuthContext = createContext<any | null>(null);
+
+export default {};

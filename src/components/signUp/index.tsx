@@ -1,13 +1,14 @@
-import { EmailInputContainer, PasswordInputContainer, SubmitInput } from "../common/auth";
-import useAuthForm from "../../hooks/useAuthForm";
+import React from 'react';
+import { EmailInputContainer, PasswordInputContainer, SubmitInput } from '../common/auth';
+import useAuthForm from '../../hooks/useAuthForm';
 
-const SignUpForm = () => {
+function SignUpForm() {
   const { handleSubmit } = useAuthForm();
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        handleSubmit("signUp");
+        handleSubmit('signUp');
       }}
     >
       <EmailInputContainer dataTestId="email-input" />
@@ -15,6 +16,6 @@ const SignUpForm = () => {
       <SubmitInput dataTestId="signup-button" text="회원가입" />
     </form>
   );
-};
+}
 
 export default SignUpForm;

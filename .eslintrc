@@ -1,7 +1,10 @@
 {
-  "extends": ["airbnb", "airbnb-typescript"],
+  "extends": ["airbnb", "airbnb-typescript", "prettier"],
   "rules": {
-    "indent": ["error", 2]
+    "indent": "error",
+    "no-unexpected-multiline": "error",
+    "react/function-component-definition": [2, { "namedcomponents": "arrow-function" }],
+    "no-alert": "off"
   },
   "parserOptions": {
     "project": "./tsconfig.json"

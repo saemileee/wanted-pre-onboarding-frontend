@@ -1,11 +1,11 @@
-import { useEffect } from "react";
-import SignUpForm from "../components/signUp";
-import AuthContextProvider from "../contexts/AuthProvider/provider";
-import { isLoggedIn } from "../utils/authUtils";
-import ROUTES from "../constants/routes";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import SignUpForm from '../components/signUp';
+import AuthContextProvider from '../contexts/AuthProvider/provider';
+import { isLoggedIn } from '../utils/authUtils';
+import ROUTES from '../constants/routes';
 
-const SignUp = () => {
+function SignUp() {
   const navigate = useNavigate();
   useEffect(() => {
     if (isLoggedIn()) {
@@ -18,5 +18,5 @@ const SignUp = () => {
       <SignUpForm />
     </AuthContextProvider>
   );
-};
+}
 export default SignUp;

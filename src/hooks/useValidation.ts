@@ -1,25 +1,26 @@
-import { useState } from "react";
-import * as AuthType from "../interface/Auth";
-import { emailRegex, passwordRegex } from "../utils/validationUtils";
-import { EMAIL_VALIDATION_MSG, PASSWORD_VALIDATION_MSG } from "../constants/message";
+import { useState } from 'react';
+import * as AuthType from '../interface/Auth';
+import { emailRegex, passwordRegex } from '../utils/validationUtils';
+import { EMAIL_VALIDATION_MSG, PASSWORD_VALIDATION_MSG } from '../constants/message';
 
-export function useValidation() {
+function useValidation() {
   const [isValid, setIsValid] = useState<boolean>(false);
-  const [validationMsg, setValidationMsg] = useState("");
+  const [validationMsg, setValidationMsg] = useState('');
 
   const handleValidator = (field: AuthType.Field, value: string) => {
-    if (field === "email") {
-      const isValid = emailRegex.test(value);
-      setIsValid(isValid);
+    if (field === 'email') {
+      const emailIsValid = emailRegex.test(value);
+      setIsValid(emailIsValid);
       setValidationMsg(EMAIL_VALIDATION_MSG);
-      return { isValid, validationMsg };
+      return { emailIsValid, validationMsg };
     }
-    if (field === "password") {
-      const isValid = passwordRegex.test(value);
-      setIsValid(isValid);
+    if (field === 'password') {
+      const pwdIsValid = passwordRegex.test(value);
+      setIsValid(pwdIsValid);
       setValidationMsg(PASSWORD_VALIDATION_MSG);
-      return { isValid, validationMsg };
+      return { pwdIsValid, validationMsg };
     }
+    return {};
   };
 
   return { isValid, validationMsg, handleValidator };
