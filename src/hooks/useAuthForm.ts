@@ -37,6 +37,7 @@ function useAuthForm() {
             const res = await authFetcher.postSignUp(formData);
             if (res.status === 201) {
               alert(SIGNUP_SUCCESS);
+              navigate(ROUTES.SIGNIN);
             }
           } catch (err) {
             alert(SIGNUP_ERR);
