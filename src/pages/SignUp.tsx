@@ -15,6 +15,7 @@ function SignUp() {
 
   return (
     <AuthContextProvider>
+      <h1>회원가입</h1>
       <SignUpForm />
     </AuthContextProvider>
   );
