@@ -16,6 +16,7 @@ const useTodoList = () => {
       todo: value,
       isCompleted: false,
       userId: 1,
+      isEditMode: false,
     };
     setTodos([...todos, newTodo]);
   };
@@ -35,11 +36,33 @@ const useTodoList = () => {
     );
   };
 
+  const handleEditClick = (id: number) => {
+    setTodos(
+      todos.map((item: TodoType.Item): TodoType.Item => {
+        if (item.id === id) {
+          return { ...item, isEditMode: true };
+        }
+        return item;
+      })
+    );
+  };
+
+  const handleEditCancelClick = (id: number) => {
+    setTodos(
+      todos.map((item: TodoType.Item): TodoType.Item => {
+        if (item.id === id) {
+          return { ...item, isEditMode: false };
+        }
+        return item;
+      })
+    );
+  };
+
   const updateTodo = (id: number, value: string) => {
     setTodos(
       todos.map((item: TodoType.Item): TodoType.Item => {
         if (item.id === id) {
-          return { ...item, todo: value };
+          return { ...item, todo: value, isEditMode: false };
         }
         return item;
       })
@@ -52,6 +75,8 @@ const useTodoList = () => {
     removeTodo,
     checkTodo,
     updateTodo,
+    handleEditClick,
+    handleEditCancelClick,
   };
 };
 
