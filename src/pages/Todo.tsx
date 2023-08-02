@@ -1,11 +1,12 @@
 import React from 'react';
-import TodoList from '../components/todo/TodoList';
+import TodoForm from '../components/todo';
+import TodoContextProvider from '../contexts/TodoContext/provider';
 
 function Todo() {
   return (
-    <div>
-      <TodoList />
-    </div>
+    <TodoContextProvider>
+      <TodoForm />
+    </TodoContextProvider>
   );
 }
 export default Todo;
