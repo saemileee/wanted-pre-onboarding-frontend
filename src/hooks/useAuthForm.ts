@@ -3,13 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import useValidation from './useValidation';
 import * as AuthType from '../interface/Auth';
 import { AuthContext } from '../contexts/AuthProvider/context';
-import {
-  SIGININ_VALIDATION_MSG,
-  SIGNIN_ERR,
-  SIGNIN_SUCCESS,
-  SIGNUP_ERR,
-  SIGNUP_SUCCESS,
-} from '../constants/message';
+import { SIGNIN_ERR, SIGNIN_SUCCESS, SIGNUP_ERR, SIGNUP_SUCCESS } from '../constants/message';
 import * as authFetcher from '../api/authFetcher';
 import ROUTES from '../constants/routes';
 
@@ -41,20 +35,17 @@ function useAuthForm() {
     if (field === 'email') {
       const validationResult = handleValidator('email', value)!;
       setEmailValidation(validationResult);
-      setFormData(value);
+      setFormData({ ...formData!, email: value });
     }
     if (field === 'password') {
       const validationResult = handleValidator('password', value)!;
       setPwdValidation(validationResult);
-      setFormData(value);
+      setFormData({ ...formData!, password: value });
     }
   };
 
   const handleSubmit = (type: AuthType.Type) => {
-    const { isValid: emailIsValid } = handleValidator('email', formData.email)!;
-    const { isValid: pwdIsValid } = handleValidator('password', formData.password)!;
-
-    if (emailIsValid && pwdIsValid) {
+    if (isSubmitBtnEnabled) {
       if (type === 'signUp') {
         const fetchData = async () => {
           try {
@@ -84,8 +75,6 @@ function useAuthForm() {
         };
         fetchData();
       }
-    } else {
-      alert(SIGININ_VALIDATION_MSG);
     }
   };
 
