@@ -35,7 +35,11 @@ export function PasswordInputContainer({ dataTestId }: { dataTestId: string }) {
 }
 
 export function SubmitInput({ dataTestId, text }: { dataTestId: string; text: string }) {
-  return <input type="submit" data-testid={dataTestId} value={text} />;
+  const { isSubmitBtnEnabled } = useAuthForm();
+
+  return (
+    <input type="submit" data-testid={dataTestId} value={text} disabled={!isSubmitBtnEnabled} />
+  );
 }
 
 export function LoginButton() {

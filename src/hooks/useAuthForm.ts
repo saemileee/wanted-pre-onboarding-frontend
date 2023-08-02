@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useValidation from './useValidation';
 import * as AuthType from '../interface/Auth';
@@ -17,6 +17,20 @@ function useAuthForm() {
   const navigate = useNavigate();
   const { isValid, validationMsg, handleValidator } = useValidation();
   const { formData, setFormData } = useContext(AuthContext);
+
+  const CheckSubmitBtnEnabled = () => {
+    const { emailIsValid } = handleValidator('email', formData.email)!;
+    const { pwdIsValid } = handleValidator('password', formData.password)!;
+    if (emailIsValid && pwdIsValid) {
+      return true;
+    }
+    return false;
+  };
+
+  const isSubmitBtnEnabled = useMemo(
+    () => CheckSubmitBtnEnabled(),
+    [formData.email, formData.password]
+  );
 
   const handleFieldChange = (field: AuthType.Field, value: string) => {
     handleValidator(field, value);
@@ -65,7 +79,14 @@ function useAuthForm() {
     }
   };
 
-  return { isValid, validationMsg, formData, handleFieldChange, handleSubmit };
+  return {
+    isValid,
+    validationMsg,
+    formData,
+    handleFieldChange,
+    handleSubmit,
+    isSubmitBtnEnabled,
+  };
 }
 
 export default useAuthForm;
