@@ -19,7 +19,7 @@ function SignIn() {
     <main>
       <div className={authStyles.wrap}>
         <NavButton text="회원가입 이동" url={ROUTES.SIGNUP} />
-        <h1 className={authStyles.title}>Login</h1>
+        <h1 className={authStyles.title}>LOGIN</h1>
         <AuthContextProvider>
           <SignInForm />
         </AuthContextProvider>
