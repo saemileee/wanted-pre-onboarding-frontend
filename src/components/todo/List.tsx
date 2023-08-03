@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import useTodoList from '../../hooks/useTodoList';
 import * as TodoType from '../../interface/Todo';
 import Item from './Item';
+import todoStyles from '../../styles/Todo/todo.module.scss';
 
 function TodoList() {
   const { todos } = useTodoList();
@@ -17,11 +18,11 @@ function TodoList() {
   };
 
   return (
-    <ul>
+    <ul className={todoStyles.ulContainer}>
       {todoList.map((todoItem: TodoType.Item) => {
         const { id } = todoItem;
         return (
-          <li key={`todo-${id}`}>
+          <li className={todoStyles.listContainer} key={`todo-${id}`}>
             <Item setTodoList={handleSetTodoList} item={todoItem} />
           </li>
         );

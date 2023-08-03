@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import useTodoList from '../../hooks/useTodoList';
+import todoStyles from '../../styles/Todo/todo.module.scss';
 
 function Create() {
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -16,9 +17,15 @@ function Create() {
   };
 
   return (
-    <form onSubmit={handleFormSubmit}>
-      <input data-testid="new-todo-input" type="text" ref={inputRef} />
-      <button data-testid="new-todo-add-button" type="submit">
+    <form className={todoStyles.todoForm} onSubmit={handleFormSubmit}>
+      <input
+        className={todoStyles.todoInput}
+        placeholder="할 일을 입력해 주세요..."
+        data-testid="new-todo-input"
+        type="text"
+        ref={inputRef}
+      />
+      <button className={todoStyles.todoAddBtn} data-testid="new-todo-add-button" type="submit">
         추가
       </button>
     </form>

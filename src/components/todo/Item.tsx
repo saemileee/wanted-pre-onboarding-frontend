@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import useTodoList from '../../hooks/useTodoList';
 import * as TodoType from '../../interface/Todo';
+import todoStyles from '../../styles/Todo/todo.module.scss';
 
 interface ItemProps {
   setTodoList: (id: number, value: string) => void;
@@ -46,23 +47,41 @@ export default function Item({ setTodoList, item }: ItemProps) {
   return (
     <label htmlFor={id.toString()}>
       {!isEditMode ? (
-        <div>
-          <input
-            id={id.toString()}
-            type="checkbox"
-            checked={isCompleted}
-            onChange={handleIsCompletedChange}
-          />
-          <span>{todo}</span>
-          <button type="button" data-testid="modify-button" onClick={handleEditClick}>
-            수정
-          </button>
-          <button type="button" data-testid="delete-button" onClick={handleRemoveClick}>
-            삭제
-          </button>
+        <div className={`${todoStyles.todoContainer} `}>
+          <div className={todoStyles.leftContainer}>
+            <input
+              id={id.toString()}
+              className={todoStyles.checkbox}
+              type="checkbox"
+              checked={isCompleted}
+              onChange={handleIsCompletedChange}
+            />
+            <span className={todoStyles.content}>{todo}</span>
+          </div>
+          <div className={todoStyles.btnContainer}>
+            <button
+              className={todoStyles.leftBtn}
+              type="button"
+              data-testid="modify-button"
+              onClick={handleEditClick}
+            >
+              수정
+            </button>
+            <button
+              className={todoStyles.rightBtn}
+              type="button"
+              data-testid="delete-button"
+              onClick={handleRemoveClick}
+            >
+              삭제
+            </button>
+          </div>
         </div>
       ) : (
-        <form onSubmit={handleSubmit}>
+        <form
+          className={`${todoStyles.todoContainer} ${todoStyles.editMode}`}
+          onSubmit={handleSubmit}
+        >
           <input
             id={id.toString()}
             type="text"
@@ -70,12 +89,23 @@ export default function Item({ setTodoList, item }: ItemProps) {
             value={editedValue}
             onChange={handleInputChange}
           />
-          <button type="submit" data-testid="submit-button">
-            제출
-          </button>
-          <button type="button" data-testid="cancel-button" onClick={handleCancelClick}>
-            취소
-          </button>
+          <div className={todoStyles.btnContainer}>
+            <button
+              className={`${todoStyles.leftBtn} ${todoStyles.editSubmitBtn}`}
+              type="submit"
+              data-testid="submit-button"
+            >
+              제출
+            </button>
+            <button
+              className={todoStyles.rightBtn}
+              type="button"
+              data-testid="cancel-button"
+              onClick={handleCancelClick}
+            >
+              취소
+            </button>
+          </div>
         </form>
       )}
     </label>
