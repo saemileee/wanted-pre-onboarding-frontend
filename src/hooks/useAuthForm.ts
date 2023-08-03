@@ -2,7 +2,7 @@ import { useContext, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useValidation from './useValidation';
 import * as AuthType from '../interface/Auth';
-import { AuthContext } from '../contexts/AuthProvider/context';
+import { AuthContext } from '../contexts/AuthContext/context';
 import { SIGNIN_ERR, SIGNIN_SUCCESS, SIGNUP_ERR, SIGNUP_SUCCESS } from '../constants/message';
 import * as authFetcher from '../api/authFetcher';
 import ROUTES from '../constants/routes';

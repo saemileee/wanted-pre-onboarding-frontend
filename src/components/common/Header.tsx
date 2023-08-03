@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { NavButton } from './button';
-import { LoginButton } from './auth';
+import { NavButton } from './Buttons';
+import { LoginButton } from './Auth';
 import ROUTES from '../../constants/routes';
 import '../../styles/common/header.scss';
 

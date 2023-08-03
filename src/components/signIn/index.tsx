@@ -1,5 +1,5 @@
 import React from 'react';
-import { EmailInputContainer, PasswordInputContainer, SubmitInput } from '../common/auth';
+import { EmailInputContainer, PasswordInputContainer, SubmitInput } from '../common/Auth';
 import useAuthForm from '../../hooks/useAuthForm';
 import authStyles from '../../styles/Auth/auth.module.scss';
 

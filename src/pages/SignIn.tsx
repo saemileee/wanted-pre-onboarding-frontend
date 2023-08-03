@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SignInForm from '../components/signIn';
-import AuthContextProvider from '../contexts/AuthProvider/provider';
+import AuthContextProvider from '../contexts/AuthContext/provider';
 import ROUTES from '../constants/routes';
 import authStyles from '../styles/Auth/auth.module.scss';
 import Header from '../components/common/Header';
