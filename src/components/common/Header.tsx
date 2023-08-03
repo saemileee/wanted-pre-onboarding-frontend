@@ -11,8 +11,9 @@ export default function Header() {
   return (
     <header>
       {currentPath === ROUTES.SIGNIN && <NavButton text="회원가입" url={ROUTES.SIGNUP} />}
-      {currentPath === ROUTES.SIGNUP ||
-        (currentPath === '/' && <NavButton text="로그인" url={ROUTES.SIGNIN} />)}
+      {(currentPath === ROUTES.SIGNUP || currentPath === '/') && (
+        <NavButton text="로그인" url={ROUTES.SIGNIN} />
+      )}
       {currentPath === ROUTES.TODO && <LoginButton />}
     </header>
   );
