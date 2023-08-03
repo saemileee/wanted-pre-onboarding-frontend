@@ -1,28 +1,8 @@
+@import './variables';
 body {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
-  background-color: #f0f0f0;
+  background-color: $color-bg;
 }
-
-// color
-$color-bg: #1b1b1b;
-$color-primary: #b5cff8;
-$color-white: #ffffff;
-$color-dark-grey: #313131;
-$color-mid-grey: #505050;
-$color-light-grey: #e0e0e0;
-$color-red: #ff3916;
-$color-blue: #1671ff;
-
-// wrap
-$page-wrap-tablet: 768px;
-
-// font-size
-$font-h1: 42px;
-$font-h2: 36px;
-$font-h3: 28px;
-$font-text-l: 21px;
-$font-text-m: 18px;
-$font-text-s: 15px;
