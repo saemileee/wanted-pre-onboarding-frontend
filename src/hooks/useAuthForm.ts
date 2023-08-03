@@ -6,9 +6,11 @@ import { AuthContext } from '../contexts/AuthProvider/context';
 import { SIGNIN_ERR, SIGNIN_SUCCESS, SIGNUP_ERR, SIGNUP_SUCCESS } from '../constants/message';
 import * as authFetcher from '../api/authFetcher';
 import ROUTES from '../constants/routes';
+import useAuth from './useAuth';
 
 function useAuthForm() {
   const navigate = useNavigate();
+  const { setNewAccessToken } = useAuth();
   const { handleValidator } = useValidation();
   const {
     formData,
@@ -66,7 +68,7 @@ function useAuthForm() {
             const res = await authFetcher.postSignIn(formData);
             if (res.status === 200) {
               alert(SIGNIN_SUCCESS);
-              localStorage.setItem('accessToken', res.data.access_token);
+              setNewAccessToken(res.data.access_token);
               navigate(ROUTES.TODO);
             }
           } catch (err) {

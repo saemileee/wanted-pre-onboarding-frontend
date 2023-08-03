@@ -2,17 +2,17 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TodoForm from '../components/todo';
 import TodoContextProvider from '../contexts/TodoContext/provider';
-import { isLoggedIn } from '../utils/authUtils';
 import ROUTES from '../constants/routes';
 import todoStyles from '../styles/Todo/todo.module.scss';
 import Header from '../components/common/Header';
+import useAuth from '../hooks/useAuth';
 
 function Todo() {
   const navigate = useNavigate();
-  const userLoggedIn = isLoggedIn();
+  const { isLoggedIn } = useAuth();
 
   useEffect(() => {
-    if (!userLoggedIn) {
+    if (!isLoggedIn()) {
       navigate(ROUTES.SIGNIN);
     }
   });
@@ -20,7 +20,7 @@ function Todo() {
   return (
     <main>
       <Header />
-      {userLoggedIn ? (
+      {isLoggedIn() ? (
         <div className={todoStyles.wrap}>
           <h1 className={todoStyles.title}>✏️ Todo List</h1>
           <TodoContextProvider>

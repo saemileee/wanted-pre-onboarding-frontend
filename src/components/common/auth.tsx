@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import useAuthForm from '../../hooks/useAuthForm';
 import ROUTES from '../../constants/routes';
 import authStyle from '../../styles/Auth/auth.module.scss';
+import useAuth from '../../hooks/useAuth';
 
 export function EmailInputContainer({ dataTestId }: { dataTestId: string }) {
   const { emailValidation, handleFieldChange } = useAuthForm();
@@ -63,9 +64,10 @@ export function SubmitInput({ dataTestId, text }: { dataTestId: string; text: st
 }
 
 export function LoginButton() {
+  const { logout } = useAuth();
   const navigate = useNavigate();
   const handleLogoutClick = () => {
-    localStorage.removeItem('accessToken');
+    logout();
     navigate(ROUTES.SIGNIN);
   };
   return (
