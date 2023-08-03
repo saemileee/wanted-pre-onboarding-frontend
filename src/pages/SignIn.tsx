@@ -4,8 +4,8 @@ import SignInForm from '../components/signIn';
 import AuthContextProvider from '../contexts/AuthProvider/provider';
 import { isLoggedIn } from '../utils/authUtils';
 import ROUTES from '../constants/routes';
-import { NavButton } from '../components/common/button';
 import authStyles from '../styles/Auth/auth.module.scss';
+import Header from '../components/common/Header';
 
 function SignIn() {
   const navigate = useNavigate();
@@ -17,8 +17,8 @@ function SignIn() {
 
   return (
     <main>
+      <Header />
       <div className={authStyles.wrap}>
-        <NavButton text="회원가입 이동" url={ROUTES.SIGNUP} />
         <h1 className={authStyles.title}>LOGIN</h1>
         <AuthContextProvider>
           <SignInForm />

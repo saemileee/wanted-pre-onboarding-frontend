@@ -1,0 +1,15 @@
+@import '../../styles/common/_variables';
+
+header {
+  height: 100px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  button {
+    border: none;
+    border-bottom: 1px solid $color-primary;
+    background-color: unset;
+    color: $color-primary;
+    font-size: $font-text-s;
+  }
+}
