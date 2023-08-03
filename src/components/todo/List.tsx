@@ -4,19 +4,35 @@ import * as TodoType from '../../interface/Todo';
 import { Item, EditModeItem } from './Item';
 
 function TodoList() {
-  const [todoValue, setTodoValue] = useState('');
+  const [todosValue, setTodosValue] = useState<string[]>([]);
+
+  const handleSetTodoValue = (id: number, value: string) => {
+    setTodosValue(() => {
+      const newTodos = [...todosValue];
+      newTodos[id] = value;
+      return newTodos;
+    });
+  };
+
   const { todos } = useTodoList();
   return (
     <ul>
-      {todos.map((todoItem: TodoType.Item) => (
-        <div>
-          {todoItem.isEditMode ? (
-            <EditModeItem todoValue={todoValue} setTodoValue={setTodoValue} item={todoItem} />
-          ) : (
-            <Item todoValue={todoValue} setTodoValue={setTodoValue} item={todoItem} />
-          )}
-        </div>
-      ))}
+      {todos.map((todoItem: TodoType.Item) => {
+        const { isEditMode, id } = todoItem;
+        return (
+          <div>
+            {isEditMode ? (
+              <EditModeItem
+                todoValue={todosValue[id]}
+                setTodoValue={handleSetTodoValue}
+                item={todoItem}
+              />
+            ) : (
+              <Item setTodoValue={handleSetTodoValue} item={todoItem} />
+            )}
+          </div>
+        );
+      })}
     </ul>
   );
 }

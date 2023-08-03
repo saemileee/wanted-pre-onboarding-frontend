@@ -1,7 +1,14 @@
 import React from 'react';
 import useTodoList from '../../hooks/useTodoList';
+import * as TodoType from '../../interface/Todo';
 
-export function EditModeItem({ todoValue, setTodoValue, item }: any) {
+interface EditModeItemProps {
+  todoValue: string;
+  setTodoValue: (id: number, value: string) => void;
+  item: TodoType.Item;
+}
+
+export function EditModeItem({ todoValue, setTodoValue, item }: EditModeItemProps) {
   const { id, isCompleted } = item;
   const { updateTodo, toggleEditMode } = useTodoList();
 
@@ -13,7 +20,8 @@ export function EditModeItem({ todoValue, setTodoValue, item }: any) {
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTodoValue(e.target.value);
+    const { value } = e.target;
+    setTodoValue(id, value);
   };
 
   const handleCancelClick = () => {
@@ -43,7 +51,12 @@ export function EditModeItem({ todoValue, setTodoValue, item }: any) {
   );
 }
 
-export function Item({ setTodoValue, item }: any) {
+interface ItemProps {
+  setTodoValue: (id: number, value: string) => void;
+  item: TodoType.Item;
+}
+
+export function Item({ setTodoValue, item }: ItemProps) {
   const { id, todo, isCompleted } = item;
   const { updateTodo, toggleEditMode, removeTodo } = useTodoList();
 
@@ -52,7 +65,7 @@ export function Item({ setTodoValue, item }: any) {
   };
 
   const handleEditClick = () => {
-    setTodoValue(todo);
+    setTodoValue(id, todo);
     toggleEditMode(id);
   };
 
