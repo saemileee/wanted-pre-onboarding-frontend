@@ -27,10 +27,10 @@ const useTodoList = () => {
 
   const addTodo = (value: string) => {
     const newTodo: TodoType.Item = {
-      id: todos.length,
+      id: 0,
       todo: value,
       isCompleted: false,
-      userId: 1,
+      userId: 0,
       isEditMode: false,
     };
     const fetchData = async () => {
