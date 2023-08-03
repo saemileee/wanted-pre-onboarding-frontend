@@ -38,7 +38,9 @@ export function SubmitInput({ dataTestId, text }: { dataTestId: string; text: st
   const { isSubmitBtnEnabled } = useAuthForm();
 
   return (
-    <input type="submit" data-testid={dataTestId} value={text} disabled={!isSubmitBtnEnabled} />
+    <button type="submit" data-testid={dataTestId} disabled={!isSubmitBtnEnabled}>
+      {text}
+    </button>
   );
 }
 

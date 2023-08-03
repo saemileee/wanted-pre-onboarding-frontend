@@ -13,7 +13,7 @@ function SignInForm() {
     >
       <EmailInputContainer dataTestId="email-input" />
       <PasswordInputContainer dataTestId="password-input" />
-      <SubmitInput dataTestId="signup-button" text="로그인" />
+      <SubmitInput dataTestId="signin-button" text="로그인" />
     </form>
   );
 }
