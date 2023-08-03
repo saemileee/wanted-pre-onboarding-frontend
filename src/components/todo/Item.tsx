@@ -29,25 +29,23 @@ export function EditModeItem({ todoValue, setTodoValue, item }: EditModeItemProp
   };
 
   return (
-    <li key={id}>
+    <label htmlFor={id.toString()}>
       <form onSubmit={handleSubmit}>
-        <label htmlFor={id.toString()}>
-          <input
-            id={id.toString()}
-            type="text"
-            data-testid="modify-input"
-            value={todoValue}
-            onChange={handleInputChange}
-          />
-          <button type="submit" data-testid="submit-button">
-            제출
-          </button>
-          <button type="button" data-testid="cancel-button" onClick={handleCancelClick}>
-            취소
-          </button>
-        </label>
+        <input
+          id={id.toString()}
+          type="text"
+          data-testid="modify-input"
+          value={todoValue}
+          onChange={handleInputChange}
+        />
+        <button type="submit" data-testid="submit-button">
+          제출
+        </button>
+        <button type="button" data-testid="cancel-button" onClick={handleCancelClick}>
+          취소
+        </button>
       </form>
-    </li>
+    </label>
   );
 }
 
@@ -74,22 +72,20 @@ export function Item({ setTodoValue, item }: ItemProps) {
   };
 
   return (
-    <li key={id}>
-      <label htmlFor={id.toString()}>
-        <input
-          id={id.toString()}
-          type="checkbox"
-          checked={isCompleted}
-          onChange={handleIsCompletedChange}
-        />
-        <span>{todo}</span>
-        <button type="button" data-testid="modify-button" onClick={handleEditClick}>
-          수정
-        </button>
-        <button type="button" data-testid="delete-button" onClick={handleCancelClick}>
-          삭제
-        </button>
-      </label>
-    </li>
+    <label htmlFor={id.toString()}>
+      <input
+        id={id.toString()}
+        type="checkbox"
+        checked={isCompleted}
+        onChange={handleIsCompletedChange}
+      />
+      <span>{todo}</span>
+      <button type="button" data-testid="modify-button" onClick={handleEditClick}>
+        수정
+      </button>
+      <button type="button" data-testid="delete-button" onClick={handleCancelClick}>
+        삭제
+      </button>
+    </label>
   );
 }

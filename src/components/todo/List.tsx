@@ -20,7 +20,7 @@ function TodoList() {
       {todos.map((todoItem: TodoType.Item) => {
         const { isEditMode, id } = todoItem;
         return (
-          <div>
+          <li key={`todo-${id}`}>
             {isEditMode ? (
               <EditModeItem
                 todoValue={todosValue[id]}
@@ -30,7 +30,7 @@ function TodoList() {
             ) : (
               <Item setTodoValue={handleSetTodoValue} item={todoItem} />
             )}
-          </div>
+          </li>
         );
       })}
     </ul>
