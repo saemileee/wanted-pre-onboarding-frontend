@@ -9,10 +9,17 @@
 }
 
 .title {
+  margin-bottom: 32px;
   color: $color-white;
   font-size: $font-h1;
   font-weight: 700;
-  margin-bottom: 32px;
+}
+
+.formContainer {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .authInput {
@@ -20,9 +27,9 @@
   padding: 16px;
   border: none;
   border-radius: 8px;
-  font-size: $font-text-m;
-  color: $color-black;
   background-color: $color-light-gray10;
+  color: $color-black;
+  font-size: $font-text-m;
   &::placeholder {
     color: $color-light-gray50;
   }
@@ -34,16 +41,17 @@
 }
 
 .validationMsg {
-  height: 16px;
-  font-size: $font-text-s;
+  height: 18px;
   color: $color-red;
+  font-size: $font-text-s;
 }
 
 .submitBtn {
+  width: 100%;
   padding: 16px;
+  border: none;
   border-radius: 8px;
   background-color: $color-primary;
-  border: none;
   color: $color-black;
   &:disabled {
     background-color: $color-dark-gray20;
