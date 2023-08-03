@@ -42,6 +42,7 @@ export default function Item({ setTodoList, item }: ItemProps) {
 
   const handleCancelClick = () => {
     setIsEditMode(!isEditMode);
+    setEditedValue(item.todo);
   };
 
   return (
