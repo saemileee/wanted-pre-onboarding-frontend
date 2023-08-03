@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import AddTodoForm from './AddTodoForm';
-import TodoList from './TodoList';
+import Create from './Create';
+import TodoList from './List';
 import useTodoList from '../../hooks/useTodoList';
 
 function TodoForm() {
@@ -12,7 +12,7 @@ function TodoForm() {
 
   return (
     <>
-      <AddTodoForm />
+      <Create />
       <TodoList />
     </>
   );

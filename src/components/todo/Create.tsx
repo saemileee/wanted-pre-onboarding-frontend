@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import useTodoList from '../../hooks/useTodoList';
 
-function AddTodoForm() {
+function Create() {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const { addTodo } = useTodoList();
 
@@ -25,4 +25,4 @@ function AddTodoForm() {
   );
 }
 
-export default AddTodoForm;
+export default Create;
