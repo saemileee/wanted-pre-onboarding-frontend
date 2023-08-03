@@ -1,4 +1,6 @@
 import React from 'react';
+import './styles/common/_reset.css';
+import './styles/common/_global.scss';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
