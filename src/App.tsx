@@ -10,18 +10,15 @@ const Todo = lazy(() => import('./pages/Todo'));
 function App() {
   return (
     <BrowserRouter>
+      <Suspense fallback={<div style={{ color: 'white' }}>Loading...</div>}>
+        <Routes>
+          <Route path="/todo" element={<Todo />} />
+        </Routes>
+      </Suspense>
       <Routes>
         <Route path="/" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route
-          path="/todo"
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <Todo />
-            </Suspense>
-          }
-        />
       </Routes>
     </BrowserRouter>
   );
