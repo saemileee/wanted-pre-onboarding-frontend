@@ -6,3 +6,9 @@ body {
   height: 100%;
   background-color: $color-bg;
 }
+
+main {
+  margin: 0 auto;
+  max-width: $page-wrap-tablet;
+  min-height: 100vh;
+}

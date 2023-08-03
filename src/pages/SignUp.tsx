@@ -15,11 +15,13 @@ function SignUp() {
   }, []);
 
   return (
-    <AuthContextProvider>
+    <main>
       <NavButton text="로그인 이동" url={ROUTES.SIGNIN} />
       <h1>회원가입</h1>
-      <SignUpForm />
-    </AuthContextProvider>
+      <AuthContextProvider>
+        <SignUpForm />
+      </AuthContextProvider>
+    </main>
   );
 }
 export default SignUp;

@@ -17,7 +17,7 @@ function Todo() {
   });
 
   return (
-    <div>
+    <main>
       투두리스트
       {userLoggedIn ? (
         <div>
@@ -27,7 +27,7 @@ function Todo() {
           </TodoContextProvider>
         </div>
       ) : undefined}
-    </div>
+    </main>
   );
 }
 export default Todo;
