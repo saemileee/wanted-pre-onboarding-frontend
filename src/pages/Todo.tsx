@@ -18,11 +18,14 @@ function Todo() {
 
   return (
     <div>
+      투두리스트
       {userLoggedIn ? (
-        <TodoContextProvider>
+        <div>
           <LoginButton />
-          <TodoForm />
-        </TodoContextProvider>
+          <TodoContextProvider>
+            <TodoForm />
+          </TodoContextProvider>
+        </div>
       ) : undefined}
     </div>
   );
