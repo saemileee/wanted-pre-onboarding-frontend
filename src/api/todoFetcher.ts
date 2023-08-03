@@ -1,7 +1,6 @@
 import * as Api from './api';
 import * as TodoType from '../interface/Todo';
-
-const API_KEY = 'http://localhost:8000';
+import API_KEY from '../constants/apiKey';
 
 export async function createTodo(todo: TodoType.Item) {
   const response = await Api.post(API_KEY, '/todos', todo, true);

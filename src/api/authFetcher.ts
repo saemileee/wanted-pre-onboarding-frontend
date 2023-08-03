@@ -1,7 +1,6 @@
 import * as Api from './api';
 import * as AuthType from '../interface/Auth';
-
-const API_KEY = 'http://localhost:8000';
+import API_KEY from '../constants/apiKey';
 
 export async function postSignUp(formData: AuthType.Form) {
   const response = await Api.post(API_KEY, '/auth/signup', formData);
