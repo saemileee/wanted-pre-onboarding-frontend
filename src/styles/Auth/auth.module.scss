@@ -1,0 +1,60 @@
+@import '../common/variables';
+
+.wrap {
+  margin-top: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  color: $color-white;
+  font-size: $font-h1;
+  font-weight: 700;
+  margin-bottom: 32px;
+}
+
+.formContainer {
+  display: flex;
+  width: fit-content;
+  justify-items: center;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.authInput {
+  width: 18em;
+  padding: 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: $font-text-m;
+  color: $color-black;
+  background-color: $color-light-gray10;
+  &::placeholder {
+    color: $color-light-gray50;
+  }
+}
+
+.labelTitle {
+  margin-bottom: 12px;
+  color: $color-white;
+}
+
+.validationMsg {
+  height: 16px;
+  font-size: $font-text-s;
+  color: $color-red;
+}
+
+.submitBtn {
+  padding: 16px;
+  border-radius: 8px;
+  background-color: $color-primary;
+  border: none;
+  color: $color-black;
+  &:disabled {
+    background-color: $color-dark-gray20;
+    color: $color-dark-gray40;
+  }
+}
