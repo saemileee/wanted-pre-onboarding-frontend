@@ -1,11 +1,13 @@
 import React from 'react';
 import { EmailInputContainer, PasswordInputContainer, SubmitInput } from '../common/auth';
 import useAuthForm from '../../hooks/useAuthForm';
+import authStyles from '../../styles/Auth/auth.module.scss';
 
 function SignUpForm() {
   const { handleSubmit } = useAuthForm();
   return (
     <form
+      className={authStyles.formContainer}
       onSubmit={(e) => {
         e.preventDefault();
         handleSubmit('signUp');

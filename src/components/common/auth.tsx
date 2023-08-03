@@ -2,19 +2,27 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuthForm from '../../hooks/useAuthForm';
 import ROUTES from '../../constants/routes';
+import authStyle from '../../styles/Auth/auth.module.scss';
 
 export function EmailInputContainer({ dataTestId }: { dataTestId: string }) {
   const { emailValidation, handleFieldChange } = useAuthForm();
 
   return (
     <>
-      <input
-        type="text"
-        placeholder="아이디"
-        data-testid={dataTestId}
-        onChange={(e) => handleFieldChange('email', e.target.value)}
-      />
-      {!emailValidation.isValid ? <p>{emailValidation.msg}</p> : null}
+      <label htmlFor="email">
+        <p className={authStyle.labelTitle}>이메일</p>
+        <input
+          id="email"
+          className={authStyle.authInput}
+          type="text"
+          placeholder="abcd@abcd.com"
+          data-testid={dataTestId}
+          onChange={(e) => handleFieldChange('email', e.target.value)}
+        />
+      </label>
+      <p className={authStyle.validationMsg}>
+        {!emailValidation.isValid ? emailValidation.msg : null}
+      </p>
     </>
   );
 }
@@ -23,13 +31,18 @@ export function PasswordInputContainer({ dataTestId }: { dataTestId: string }) {
   const { pwdValidation, handleFieldChange } = useAuthForm();
   return (
     <>
-      <input
-        type="password"
-        placeholder="비밀번호"
-        data-testid={dataTestId}
-        onChange={(e) => handleFieldChange('password', e.target.value)}
-      />
-      {!pwdValidation.isValid ? <p>{pwdValidation.msg}</p> : null}
+      <label htmlFor="password">
+        <p className={authStyle.labelTitle}>비밀번호</p>
+        <input
+          id="password"
+          className={authStyle.authInput}
+          type="password"
+          placeholder="비밀번호"
+          data-testid={dataTestId}
+          onChange={(e) => handleFieldChange('password', e.target.value)}
+        />
+      </label>
+      <p className={authStyle.validationMsg}>{!pwdValidation.isValid ? pwdValidation.msg : null}</p>
     </>
   );
 }
@@ -38,7 +51,12 @@ export function SubmitInput({ dataTestId, text }: { dataTestId: string; text: st
   const { isSubmitBtnEnabled } = useAuthForm();
 
   return (
-    <button type="submit" data-testid={dataTestId} disabled={!isSubmitBtnEnabled}>
+    <button
+      className={authStyle.submitBtn}
+      type="submit"
+      data-testid={dataTestId}
+      disabled={!isSubmitBtnEnabled}
+    >
       {text}
     </button>
   );
