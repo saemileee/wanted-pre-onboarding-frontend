@@ -76,22 +76,11 @@ const useTodoList = () => {
     fetchData();
   };
 
-  const handleEditClick = (id: number) => {
+  const toggleEditMode = (id: number) => {
     setTodos(
       todos.map((item: TodoType.Item): TodoType.Item => {
         if (item.id === id) {
-          return { ...item, isEditMode: true };
-        }
-        return item;
-      })
-    );
-  };
-
-  const handleEditCancelClick = (id: number) => {
-    setTodos(
-      todos.map((item: TodoType.Item): TodoType.Item => {
-        if (item.id === id) {
-          return { ...item, isEditMode: false };
+          return { ...item, isEditMode: !item.isEditMode };
         }
         return item;
       })
@@ -104,8 +93,7 @@ const useTodoList = () => {
     addTodo,
     removeTodo,
     updateTodo,
-    handleEditClick,
-    handleEditCancelClick,
+    toggleEditMode,
   };
 };
 
