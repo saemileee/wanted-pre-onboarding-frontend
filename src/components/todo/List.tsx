@@ -1,35 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useTodoList from '../../hooks/useTodoList';
 import * as TodoType from '../../interface/Todo';
-import { Item, EditModeItem } from './Item';
+import Item from './Item';
 
 function TodoList() {
-  const [todosValue, setTodosValue] = useState<string[]>([]);
+  const { todos } = useTodoList();
 
-  const handleSetTodoValue = (id: number, value: string) => {
-    setTodosValue(() => {
-      const newTodos = [...todosValue];
-      newTodos[id] = value;
-      return newTodos;
-    });
+  const [todoList, setTodoList] = useState<TodoType.Item[]>(todos);
+
+  useEffect(() => {
+    setTodoList(todos);
+  }, [todos]);
+
+  const handleSetTodoList = (id: number, value: string) => {
+    setTodoList((prev) => prev.map((item) => (item.id === id ? { ...item, todo: value } : item)));
   };
 
-  const { todos } = useTodoList();
   return (
     <ul>
-      {todos.map((todoItem: TodoType.Item) => {
-        const { isEditMode, id } = todoItem;
+      {todoList.map((todoItem: TodoType.Item) => {
+        const { id } = todoItem;
         return (
           <li key={`todo-${id}`}>
-            {isEditMode ? (
-              <EditModeItem
-                todoValue={todosValue[id]}
-                setTodoValue={handleSetTodoValue}
-                item={todoItem}
-              />
-            ) : (
-              <Item setTodoValue={handleSetTodoValue} item={todoItem} />
-            )}
+            <Item setTodoList={handleSetTodoList} item={todoItem} />
           </li>
         );
       })}

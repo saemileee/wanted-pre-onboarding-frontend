@@ -16,7 +16,7 @@ function Create() {
   };
 
   return (
-    <form onSubmit={(e) => handleFormSubmit(e)}>
+    <form onSubmit={handleFormSubmit}>
       <input data-testid="new-todo-input" type="text" ref={inputRef} />
       <button data-testid="new-todo-add-button" type="submit">
         추가
