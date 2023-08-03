@@ -43,8 +43,8 @@ async function request<T>(params: RequestParams<T>): Promise<AxiosResponse> {
     });
 
     return response;
-  } catch (error) {
-    throw new Error('요청이 실패하였습니다.');
+  } catch (error: any) {
+    throw error.response.data;
   }
 }
 

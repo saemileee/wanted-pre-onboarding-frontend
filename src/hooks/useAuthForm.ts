@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import useValidation from './useValidation';
 import * as AuthType from '../interface/Auth';
 import { AuthContext } from '../contexts/AuthContext/context';
-import { SIGNIN_ERR, SIGNIN_SUCCESS, SIGNUP_ERR, SIGNUP_SUCCESS } from '../constants/message';
+import { SIGNIN_SUCCESS, SIGNUP_SUCCESS } from '../constants/message';
 import * as authFetcher from '../api/authFetcher';
 import ROUTES from '../constants/routes';
 import useAuth from './useAuth';
@@ -56,8 +56,8 @@ function useAuthForm() {
               alert(SIGNUP_SUCCESS);
               navigate(ROUTES.SIGNIN);
             }
-          } catch (err) {
-            alert(SIGNUP_ERR);
+          } catch (err: any) {
+            alert(err.message);
           }
         };
         fetchData();
@@ -71,8 +71,8 @@ function useAuthForm() {
               setNewAccessToken(res.data.access_token);
               navigate(ROUTES.TODO);
             }
-          } catch (err) {
-            alert(SIGNIN_ERR);
+          } catch (err: any) {
+            alert(err.message);
           }
         };
         fetchData();
