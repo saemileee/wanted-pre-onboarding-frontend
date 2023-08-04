@@ -1,8 +1,8 @@
-import { useContext, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuthFormState, useAuthFormDispatch } from '../contexts/AuthFormContext';
 import useValidation from './useValidation';
 import * as AuthType from '../interface/Auth';
-import { AuthContext } from '../contexts/AuthContext/context';
 import { SIGNIN_SUCCESS, SIGNUP_SUCCESS } from '../constants/message';
 import * as authFetcher from '../api/authFetcher';
 import ROUTES from '../constants/routes';
@@ -10,48 +10,53 @@ import useAuth from './useAuth';
 
 function useAuthForm() {
   const navigate = useNavigate();
+  const authFormState = useAuthFormState();
+  const authFormDispatch = useAuthFormDispatch();
+
   const { setNewAccessToken } = useAuth();
   const { handleValidator } = useValidation();
-  const {
-    formData,
-    setFormData,
-    emailValidation,
-    setEmailValidation,
-    pwdValidation,
-    setPwdValidation,
-  } = useContext(AuthContext);
 
-  const CheckSubmitBtnEnabled = () => {
-    if (emailValidation.isValid && pwdValidation.isValid) {
-      return true;
-    }
-    return false;
-  };
-
-  const isSubmitBtnEnabled = useMemo(
-    () => CheckSubmitBtnEnabled(),
-    [emailValidation, pwdValidation]
-  );
-
-  const handleFieldChange = (field: AuthType.Field, value: string) => {
+  const changeAuthForm = (
+    field: AuthType.Field,
+    value: string
+  ): {
+    isValid: boolean;
+    msg: string;
+  } | null => {
     if (field === 'email') {
       const validationResult = handleValidator('email', value)!;
-      setEmailValidation(validationResult);
-      setFormData({ ...formData!, email: value });
+      authFormDispatch({
+        type: 'CHANGE_EMAIL',
+        payload: { value, isValid: validationResult.isValid },
+      });
+      return validationResult;
     }
     if (field === 'password') {
       const validationResult = handleValidator('password', value)!;
-      setPwdValidation(validationResult);
-      setFormData({ ...formData!, password: value });
+      authFormDispatch({
+        type: 'CHANGE_PASSWORD',
+        payload: { value, isValid: validationResult.isValid },
+      });
+      return validationResult;
     }
+    return null;
   };
 
+  const isSubmitBtnEnabled = useMemo(() => {
+    if (authFormState.email.isValid && authFormState.password.isValid) {
+      return true;
+    }
+    return false;
+  }, [authFormState]);
+
   const handleSubmit = (type: AuthType.Type) => {
-    if (isSubmitBtnEnabled) {
+    if (authFormState.email.isValid && authFormState.password.isValid) {
+      const { email, password } = authFormState;
+      const req = { email: email.value, password: password.value };
       if (type === 'signUp') {
         const fetchData = async () => {
           try {
-            const res = await authFetcher.postSignUp(formData);
+            const res = await authFetcher.postSignUp(req);
             if (res.status === 201) {
               alert(SIGNUP_SUCCESS);
               navigate(ROUTES.SIGNIN);
@@ -65,7 +70,7 @@ function useAuthForm() {
       if (type === 'signIn') {
         const fetchData = async () => {
           try {
-            const res = await authFetcher.postSignIn(formData);
+            const res = await authFetcher.postSignIn(req);
             if (res.status === 200) {
               alert(SIGNIN_SUCCESS);
               setNewAccessToken(res.data.access_token);
@@ -81,12 +86,9 @@ function useAuthForm() {
   };
 
   return {
-    emailValidation,
-    pwdValidation,
-    formData,
-    handleFieldChange,
-    handleSubmit,
+    changeAuthForm,
     isSubmitBtnEnabled,
+    handleSubmit,
   };
 }
 
