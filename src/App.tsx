@@ -13,12 +13,10 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/todo" element={<Todo />} />
-      </Routes>
-      <Routes>
         <Route path="/" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/todo" element={<Todo />} />
         <Route
           path="/*"
           element={isLoggedIn() ? <Navigate to={ROUTES.TODO} /> : <Navigate to="/" />}
