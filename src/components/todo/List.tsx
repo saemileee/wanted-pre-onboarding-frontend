@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import useTodoList from '../../hooks/useTodoList';
 import * as TodoType from '../../interface/Todo';
 import Item from './Item';
 import todoStyles from '../../styles/Todo/todo.module.scss';
+import { useTodoState } from '../../contexts/TodoContext';
 
 function TodoList() {
-  const { todos } = useTodoList();
+  const todoState = useTodoState();
 
-  const [todoList, setTodoList] = useState<TodoType.Item[]>(todos);
+  const [todoList, setTodoList] = useState<TodoType.Item[]>(todoState);
 
   useEffect(() => {
-    setTodoList(todos);
-  }, [todos]);
+    setTodoList(todoState);
+  }, [todoState]);
 
   const handleSetTodoList = (id: number, value: string) => {
     setTodoList((prev) => prev.map((item) => (item.id === id ? { ...item, todo: value } : item)));

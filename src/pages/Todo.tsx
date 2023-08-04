@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TodoForm from '../components/todo';
-import TodoContextProvider from '../contexts/TodoContext/provider';
+import { TodoProvider } from '../contexts/TodoContext';
 import ROUTES from '../constants/routes';
 import todoStyles from '../styles/Todo/todo.module.scss';
 import Header from '../components/common/Header';
@@ -23,9 +23,9 @@ function Todo() {
       {isLoggedIn() ? (
         <div className={todoStyles.wrap}>
           <h1 className={todoStyles.title}>✏️ Todo List</h1>
-          <TodoContextProvider>
+          <TodoProvider>
             <TodoForm />
-          </TodoContextProvider>
+          </TodoProvider>
         </div>
       ) : undefined}
     </main>

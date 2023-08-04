@@ -10,7 +10,7 @@ interface ItemProps {
 
 export default function Item({ setTodoList, item }: ItemProps) {
   const { id, todo, isCompleted } = item;
-  const { updateTodo, removeTodo } = useTodoList();
+  const { updateTodo, deleteTodo } = useTodoList();
   const [isEditMode, setIsEditMode] = useState(false);
   const [editedValue, setEditedValue] = useState(item.todo);
 
@@ -23,7 +23,7 @@ export default function Item({ setTodoList, item }: ItemProps) {
   };
 
   const handleRemoveClick = () => {
-    removeTodo(id);
+    deleteTodo(id);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
