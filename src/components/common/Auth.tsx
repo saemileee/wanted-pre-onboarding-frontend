@@ -75,15 +75,15 @@ export function SubmitInput({ dataTestId, text }: { dataTestId: string; text: st
   );
 }
 
-export function LoginButton() {
-  const { logout } = useAuth();
+export function LogoutButton() {
+  const { removeAccessToken } = useAuth();
   const navigate = useNavigate();
   const handleLogoutClick = () => {
-    logout();
+    removeAccessToken();
     navigate(ROUTES.SIGNIN);
   };
   return (
-    <button type="button" onClick={() => handleLogoutClick()}>
+    <button type="button" onClick={handleLogoutClick}>
       로그아웃
     </button>
   );

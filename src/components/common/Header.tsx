@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { NavButton } from './Buttons';
-import { LoginButton } from './Auth';
+import { LogoutButton } from './Auth';
 import ROUTES from '../../constants/routes';
 import '../../styles/common/header.scss';
 
@@ -14,7 +14,7 @@ export default function Header() {
       {(currentPath === ROUTES.SIGNUP || currentPath === '/') && (
         <NavButton text="로그인" url={ROUTES.SIGNIN} />
       )}
-      {currentPath === ROUTES.TODO && <LoginButton />}
+      {currentPath === ROUTES.TODO && <LogoutButton />}
     </header>
   );
 }
