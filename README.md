@@ -39,14 +39,13 @@ npm run start
 ## 4. 사용 라이브러리
 
 <hr>
+React Router
 
-SCSS
-
-TypeScript
+Sass
 
 Axios
 
-React Router
+TypeScript
 
 eslint
 
@@ -66,8 +65,6 @@ eslint
 │   └── 📂 todo
 ├── 📂 constants
 ├── 📂 contexts
-│   ├── 📂 AuthContext
-│   └── 📂 TodoContext
 ├── 📂 hooks
 ├── 📂 interface
 ├── 📂 pages
