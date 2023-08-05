@@ -98,11 +98,13 @@
         border: none;
         border-radius: 4px;
         &.leftBtn {
+          width: 100%;
           background-color: $color-blue;
           color: $color-white;
           margin-right: 6px;
         }
         &.rightBtn {
+          width: 100%;
           background-color: $color-dark-gray60;
           color: $color-white;
         }
