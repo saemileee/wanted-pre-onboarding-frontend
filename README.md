@@ -28,9 +28,9 @@ npm run start
 
 <hr>
 
-🔗 배포 링크 http://34.64.35.244/
+🔗 <a href="http://34.64.35.244/" target="_blank">배포 링크로 확인하기</a>
 
-✅ GCP 배포
+✅ GCP SPA 배포
 
 ✅ 소스맵 설정으로 코드 난독화
 
@@ -39,15 +39,16 @@ npm run start
 ## 4. 사용 라이브러리
 
 <hr>
-React Router
 
-Sass
+🔗 React Router
 
-Axios
+🪄 Sass
 
-TypeScript
+📡 Axios
 
-eslint
+🧩 TypeScript
+
+🛠️ eslint
 
 </br>
 
