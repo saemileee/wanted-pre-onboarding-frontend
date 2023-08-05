@@ -9,17 +9,22 @@ import useAuth from './hooks/useAuth';
 import ROUTES from './constants/routes';
 
 function App() {
-  const { isLoggedIn } = useAuth();
+  const { getLoginState } = useAuth();
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<SignUp />} />
+        <Route
+          path="/"
+          element={
+            getLoginState() ? <Navigate to={ROUTES.TODO} /> : <Navigate to={ROUTES.SIGNIN} />
+          }
+        />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/todo" element={<Todo />} />
         <Route
           path="/*"
-          element={isLoggedIn() ? <Navigate to={ROUTES.TODO} /> : <Navigate to="/" />}
+          element={getLoginState() ? <Navigate to={ROUTES.TODO} /> : <Navigate to="/" />}
         />
       </Routes>
     </BrowserRouter>
