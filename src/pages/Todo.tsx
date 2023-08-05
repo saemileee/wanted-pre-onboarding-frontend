@@ -9,10 +9,10 @@ import useAuth from '../hooks/useAuth';
 
 function Todo() {
   const navigate = useNavigate();
-  const { isLoggedIn } = useAuth();
+  const { getLoginState } = useAuth();
 
   useEffect(() => {
-    if (!isLoggedIn()) {
+    if (!getLoginState()) {
       navigate(ROUTES.SIGNIN);
     }
   });
@@ -20,7 +20,7 @@ function Todo() {
   return (
     <main>
       <Header />
-      {isLoggedIn() ? (
+      {getLoginState() ? (
         <div className={todoStyles.wrap}>
           <h1 className={todoStyles.title}>✏️ Todo List</h1>
           <TodoProvider>

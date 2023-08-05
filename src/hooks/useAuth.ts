@@ -1,26 +1,27 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 function useAuth() {
   const [accessToken, setAccessToken] = useState(localStorage.getItem('accessToken'));
 
-  const isLoggedIn = () => !!accessToken;
-  const getAccessToken = () => accessToken;
+  const getLoginState = useCallback(() => !!accessToken, [accessToken]);
+  const getAccessToken = useCallback(() => accessToken, [accessToken]);
 
   const setNewAccessToken = (newToken: string) => {
     localStorage.setItem('accessToken', newToken);
     setAccessToken(newToken);
   };
 
-  const logout = () => {
+  const removeAccessToken = () => {
     localStorage.removeItem('accessToken');
     setAccessToken(null);
   };
 
   return {
-    isLoggedIn,
+    accessToken,
+    getLoginState,
     getAccessToken,
     setNewAccessToken,
-    logout,
+    removeAccessToken,
   };
 }
 
