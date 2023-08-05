@@ -9,9 +9,9 @@ import useAuth from '../hooks/useAuth';
 
 function SignUp() {
   const navigate = useNavigate();
-  const { isLoggedIn } = useAuth();
+  const { getLoginState } = useAuth();
   useEffect(() => {
-    if (isLoggedIn()) {
+    if (getLoginState()) {
       navigate(ROUTES.TODO);
     }
   }, []);

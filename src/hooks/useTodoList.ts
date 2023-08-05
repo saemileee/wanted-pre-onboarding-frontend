@@ -9,7 +9,7 @@ const useTodoList = () => {
       const res = await todoFetcher.getTodos();
       todoDispatch({ type: 'GET', payload: res.data });
     } catch (err: any) {
-      throw new Error(err);
+      alert(err.message);
     }
   };
 
@@ -18,7 +18,7 @@ const useTodoList = () => {
       const res = await todoFetcher.createTodo({ todo: value });
       todoDispatch({ type: 'CREATE', payload: res.data });
     } catch (err: any) {
-      throw new Error(err);
+      alert(err.message);
     }
   };
 
@@ -28,7 +28,7 @@ const useTodoList = () => {
       const res = await todoFetcher.updateTodo(id, req);
       todoDispatch({ type: 'UPDATE', payload: res.data });
     } catch (err: any) {
-      throw new Error(err);
+      alert(err.message);
     }
   };
 
@@ -37,7 +37,7 @@ const useTodoList = () => {
       await todoFetcher.deleteTodo(id);
       todoDispatch({ type: 'DELETE', payload: id });
     } catch (err: any) {
-      throw new Error(err);
+      alert(err.message);
     }
   };
 
