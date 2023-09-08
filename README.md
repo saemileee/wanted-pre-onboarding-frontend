@@ -28,11 +28,8 @@ npm run start
 
 <hr>
 
-🔗 <a href="http://34.64.35.244/" target="_blank">배포 링크로 확인하기</a>
+🔗 <a href="https://wanted-pre-onboarding-frontend-tau-dun.vercel.app/signin" target="_blank">배포 링크로 확인하기</a>
 
-✅ GCP SPA 배포
-
-✅ 소스맵 설정으로 코드 난독화
 
 </br>
 
